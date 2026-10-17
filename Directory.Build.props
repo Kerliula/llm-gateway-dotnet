@@ -1,0 +1,32 @@
+<Project>
+  <!-- Shared settings for every project in the solution. Project files only hold what is specific to them. -->
+
+  <PropertyGroup Label="Language">
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Code analysis">
+    <!-- Microsoft's recommended set of code-quality (CAxxxx) rules for the latest SDK. -->
+    <AnalysisLevel>latest-recommended</AnalysisLevel>
+    <!-- Report .editorconfig style (IDExxxx) rules during build, not only in the IDE. -->
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <!-- Required for the compiler to report unused usings (IDE0005) at build time. -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <!-- CS1591: missing XML doc comments. This is an app, not a public library. -->
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Label="CI" Condition="'$(GITHUB_ACTIONS)' == 'true'">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+    <!-- Warnings stay warnings locally so experiments aren't blocked, but CI must be clean. -->
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <!-- NU1902: vulnerable transitive MessagePack pulled in by Aspire; fixed by a future Aspire update. -->
+    <WarningsNotAsErrors>$(WarningsNotAsErrors);NU1902</WarningsNotAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup Label="Analyzers">
+    <PackageReference Include="Meziantou.Analyzer" Version="3.0.303" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
+  </ItemGroup>
+</Project>
