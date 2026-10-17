@@ -1,0 +1,18 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/LlmGateway.AppHost/LlmGateway.AppHost.csproj" />
+    <Project Path="src/LlmGateway.Core/LlmGateway.Core.csproj" />
+    <Project Path="src/LlmGateway.Dashboard/LlmGateway.Dashboard.csproj" />
+    <Project Path="src/LlmGateway.Data/LlmGateway.Data.csproj" />
+    <Project Path="src/LlmGateway.Gateway/LlmGateway.Gateway.csproj" />
+    <Project Path="src/LlmGateway.MockProvider/LlmGateway.MockProvider.csproj" />
+    <Project Path="src/LlmGateway.ServiceDefaults/LlmGateway.ServiceDefaults.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/LlmGateway.Core.Tests/LlmGateway.Core.Tests.csproj" />
+    <Project Path="tests/LlmGateway.Gateway.Tests/LlmGateway.Gateway.Tests.csproj" />
+  </Folder>
+  <Folder Name="/tools/">
+    <Project Path="tools/LlmGateway.LoadGen/LlmGateway.LoadGen.csproj" />
+  </Folder>
+</Solution>
