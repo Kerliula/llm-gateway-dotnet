@@ -11,6 +11,8 @@ reasoning behind non-obvious code, and work one milestone (M0, M1, …) at a tim
 - Run everything (needs Docker): `dotnet run --project src/LlmGateway.AppHost`
 - Build: `dotnet build`
 - Test: `dotnet test`
+- Format (run before every commit): `dotnet format`
+- Same checks as CI: `dotnet format --verify-no-changes && GITHUB_ACTIONS=true dotnet build -c Release && dotnet test -c Release --no-build`
 
 ## Layout
 - `src/LlmGateway.Core`: pure logic, no ASP.NET references. Keep it that way so it stays unit-testable.
@@ -21,6 +23,11 @@ reasoning behind non-obvious code, and work one milestone (M0, M1, …) at a tim
 
 ## Conventions
 - .NET 10, nullable enabled, file-scoped namespaces.
+- Shared build settings live in `Directory.Build.props`; don't repeat `TargetFramework`, `Nullable` or `ImplicitUsings` in project files.
+- Code analysis: `AnalysisLevel=latest-recommended` + Meziantou.Analyzer, style rules enforced in build via `.editorconfig`.
+  Warnings are errors in CI. Fix warnings rather than suppressing them; if a suppression is truly needed,
+  scope it narrowly in `.editorconfig` with a comment explaining why.
+- Line endings are LF (`.gitattributes`).
 - Tests: xUnit v3 + Shouldly (not FluentAssertions, which needs a commercial license from v8).
 - Never log request/response bodies or API keys. Store API keys as SHA-256 hashes only.
 - Provider API keys come from user-secrets / Aspire parameters, never from committed config.
